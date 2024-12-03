@@ -5,9 +5,12 @@ void main()
     // float distanceToCenter = distance(uv, vec2(0.5));
     float distanceToCenter = length(uv - vec2(0.5));
 
+    // discard make the shader not render the pixel in the position
+    if(distanceToCenter > 0.5){
+        discard;
+    }
 
-
-    gl_FragColor = vec4(vec3(distanceToCenter), 1.0);
+    gl_FragColor = vec4(1.0,1.0,1.0, 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
 }
