@@ -85,15 +85,32 @@ displacement.canvas = document.createElement("canvas");
 displacement.canvas.width = 128;
 displacement.canvas.height = 128;
 displacement.canvas.style.position = "fixed";
-displacement.canvas.width = "512px";
-displacement.canvas.heigh = "512px";
-displacement.canvas.top = 0;
-displacement.canvas.left = 0;
-displacement.canvas.zIndex = 10;
+displacement.canvas.style.width = "512px";
+displacement.canvas.style.height = "512px";
+displacement.canvas.style.top = 0;
+displacement.canvas.style.left = 0;
+displacement.canvas.style.zIndex = 10;
 document.body.append(displacement.canvas);
 
 // context
 displacement.context = displacement.canvas.getContext("2d");
+// displacement.context.fillStyle = "red";
+displacement.context.fillRect(
+  0,
+  0,
+  displacement.canvas.width,
+  displacement.canvas.height
+);
+
+// glow image
+displacement.glowImage = new Image();
+displacement.glowImage.src = "./glow.png";
+window.setTimeout(() => {
+  displacement.context.drawImage(displacement.glowImage, 20, 20, 32, 32);
+}, 1000);
+
+// plane for raycasting (to track and send to canvas for drawing
+displacement.interactivePlane = new THREE.Mesh(new THREE.PlaneGeometry(10, 10));
 
 /**
  * Particles
