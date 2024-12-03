@@ -15,9 +15,9 @@ void main()
     float pictureIntensity = texture(uPictureTexture, uv).r;
 
     // Point size
-    gl_PointSize = pictureIntensity * 0.3 * uResolution.y;
+    gl_PointSize = pictureIntensity * 0.05 * uResolution.y;
     gl_PointSize *= (1.0 / - viewPosition.z);
 
     // varyings
-    vColor = vec3(pictureIntensity);
+    vColor = vec3(pow(pictureIntensity, 2.0));
 }

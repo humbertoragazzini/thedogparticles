@@ -76,7 +76,7 @@ renderer.setPixelRatio(sizes.pixelRatio);
 /**
  * Particles
  */
-const particlesGeometry = new THREE.PlaneGeometry(10, 10, 32, 32);
+const particlesGeometry = new THREE.PlaneGeometry(10, 10, 500, 500);
 
 const particlesMaterial = new THREE.ShaderMaterial({
   vertexShader: particlesVertexShader,
