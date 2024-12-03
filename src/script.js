@@ -87,7 +87,13 @@ displacement.canvas.height = 128;
 displacement.canvas.style.position = "fixed";
 displacement.canvas.width = "512px";
 displacement.canvas.heigh = "512px";
+displacement.canvas.top = 0;
+displacement.canvas.left = 0;
+displacement.canvas.zIndex = 10;
 document.body.append(displacement.canvas);
+
+// context
+displacement.context = displacement.canvas.getContext("2d");
 
 /**
  * Particles
