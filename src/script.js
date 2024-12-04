@@ -110,7 +110,24 @@ window.setTimeout(() => {
 }, 1000);
 
 // plane for raycasting (to track and send to canvas for drawing
-displacement.interactivePlane = new THREE.Mesh(new THREE.PlaneGeometry(10, 10));
+displacement.interactivePlane = new THREE.Mesh(
+  new THREE.PlaneGeometry(10, 10),
+  new THREE.MeshBasicMaterial("red")
+);
+
+scene.add(displacement.interactivePlane);
+
+/**
+ * Raycaster
+ */
+
+displacement.raycaster = new THREE.Raycaster();
+
+// Coordinates
+displacement.cursorCoordinates = new THREE.Vector2(999, 999);
+window.addEventListener("pointermove", () => {
+  console.log(e);
+});
 
 /**
  * Particles
