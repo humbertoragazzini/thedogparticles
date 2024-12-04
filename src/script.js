@@ -112,7 +112,7 @@ window.setTimeout(() => {
 // plane for raycasting (to track and send to canvas for drawing
 displacement.interactivePlane = new THREE.Mesh(
   new THREE.PlaneGeometry(10, 10),
-  new THREE.MeshBasicMaterial("red")
+  new THREE.MeshBasicMaterial({ color: "red" })
 );
 
 scene.add(displacement.interactivePlane);
@@ -125,8 +125,9 @@ displacement.raycaster = new THREE.Raycaster();
 
 // Coordinates
 displacement.cursorCoordinates = new THREE.Vector2(999, 999);
-window.addEventListener("pointermove", () => {
-  console.log(e);
+window.addEventListener("pointermove", (e) => {
+  displacement.cursorCoordinates.x = (e.clientX / sizes.width) * 2 - 1;
+  displacement.cursorCoordinates.y = -(e.clientY / sizes.height) * 2 + 1;
 });
 
 /**
@@ -156,6 +157,16 @@ scene.add(particles);
 const tick = () => {
   // Update controls
   controls.update();
+
+  //raycaster
+  displacement.raycaster.setFromCamera(displacement.cursorCoordinates, camera);
+  const intercections = displacement.raycaster.intersectObject(
+    displacement.interactivePlane
+  );
+
+  if (intercections.length > 0) {
+    console.log(intercections);
+  }
 
   // Render
   renderer.render(scene, camera);
