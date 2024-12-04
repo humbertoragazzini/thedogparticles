@@ -165,7 +165,8 @@ const tick = () => {
   );
 
   if (intercections.length > 0) {
-    console.log(intercections);
+    const uv = intercections[0].uv;
+    console.log(uv);
   }
 
   // Render
