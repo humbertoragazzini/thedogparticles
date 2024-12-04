@@ -12,10 +12,10 @@ void main()
     //displacement
     vec3 newPosition = position;
     float displacementIntensity = texture(uDisplacementTexture,uv).r;
-
-    vec3 displacementDirection = vec3(0.0,0.0,5.0);
-
-    displacementDirection*=displacementIntensity;
+    displacementIntensity = smoothstep(0.1,0.3,displacementIntensity);
+    vec3 displacementDirection = vec3(cos(aAngles),sin(aAngles),5.0);
+    displacementDirection = normalize(displacementDirection);
+    displacementDirection*=displacementIntensity * 3.0;
     displacementDirection*=aIntensity;
 
     newPosition+=displacementDirection;

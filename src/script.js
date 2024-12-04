@@ -112,7 +112,7 @@ window.setTimeout(() => {
 // plane for raycasting (to track and send to canvas for drawing
 displacement.interactivePlane = new THREE.Mesh(
   new THREE.PlaneGeometry(10, 10),
-  new THREE.MeshBasicMaterial({ color: "red" })
+  new THREE.MeshBasicMaterial({ color: "red", side: THREE.DoubleSide })
 );
 displacement.interactivePlane.visible = false;
 scene.add(displacement.interactivePlane);
@@ -138,7 +138,8 @@ displacement.texture = new THREE.CanvasTexture(displacement.canvas);
  * Particles
  */
 const particlesGeometry = new THREE.PlaneGeometry(10, 10, 500, 500);
-
+particlesGeometry.setIndex(null);
+particlesGeometry.deleteAttribute("normal");
 // Intensity array
 const intensityArray = new Float32Array(
   particlesGeometry.attributes.position.count
@@ -158,7 +159,7 @@ const anglesArray = new Float32Array(
   particlesGeometry.attributes.position.count
 );
 
-for (let i = 0; i < anglesArray.attributes.position.count; i++) {
+for (let i = 0; i < particlesGeometry.attributes.position.count; i++) {
   anglesArray[i] = Math.random() * Math.PI * 2;
 }
 
