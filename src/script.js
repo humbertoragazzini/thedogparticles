@@ -144,6 +144,29 @@ const intensityArray = new Float32Array(
   particlesGeometry.attributes.position.count
 );
 
+for (let i = 0; i < particlesGeometry.attributes.position.count; i++) {
+  intensityArray[i] = Math.random();
+}
+
+particlesGeometry.setAttribute(
+  "aIntensity",
+  new THREE.BufferAttribute(intensityArray, 1)
+);
+
+// Angle array
+const anglesArray = new Float32Array(
+  particlesGeometry.attributes.position.count
+);
+
+for (let i = 0; i < anglesArray.attributes.position.count; i++) {
+  anglesArray[i] = Math.random() * Math.PI * 2;
+}
+
+particlesGeometry.setAttribute(
+  "aAngles",
+  new THREE.BufferAttribute(anglesArray, 1)
+);
+
 const particlesMaterial = new THREE.ShaderMaterial({
   vertexShader: particlesVertexShader,
   fragmentShader: particlesFragmentShader,
