@@ -168,9 +168,31 @@ const tick = () => {
   if (intercections.length > 0) {
     const uv = intercections[0].uv;
     displacement.canvasCoordinates.x = uv.x * displacement.canvas.width;
-    displacement.canvasCoordinates.y = uv.y * displacement.canvas.height;
+    displacement.canvasCoordinates.y = (1 - uv.y) * displacement.canvas.height;
     console.log(uv);
   }
+
+  // fading all in the canvas
+  displacement.context.globalCompositeOperation = "source-over";
+  displacement.context.globalAlpha = 0.1;
+  displacement.context.fillRect(
+    0,
+    0,
+    displacement.canvas.width,
+    displacement.canvas.height
+  );
+
+  //displacement draw image
+  const glowSize = displacement.canvas.width * 0.25;
+  displacement.context.globalCompositeOperation = "lighten";
+  displacement.context.globalAlpha = 1;
+  displacement.context.drawImage(
+    displacement.glowImage,
+    displacement.canvasCoordinates.x - glowSize / 2,
+    displacement.canvasCoordinates.y - glowSize / 2,
+    glowSize,
+    glowSize
+  );
 
   // Render
   renderer.render(scene, camera);
