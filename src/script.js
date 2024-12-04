@@ -139,6 +139,11 @@ displacement.texture = new THREE.CanvasTexture(displacement.canvas);
  */
 const particlesGeometry = new THREE.PlaneGeometry(10, 10, 500, 500);
 
+// Intensity array
+const intensityArray = new Float32Array(
+  particlesGeometry.attributes.position.count
+);
+
 const particlesMaterial = new THREE.ShaderMaterial({
   vertexShader: particlesVertexShader,
   fragmentShader: particlesFragmentShader,
@@ -150,7 +155,7 @@ const particlesMaterial = new THREE.ShaderMaterial({
       )
     ),
     uPictureTexture: new THREE.Uniform(textureLoader.load("./picture-1.png")),
-    uDisplacementTexture: displacement.texture,
+    uDisplacementTexture: new THREE.Uniform(displacement.texture),
   },
 });
 const particles = new THREE.Points(particlesGeometry, particlesMaterial);
