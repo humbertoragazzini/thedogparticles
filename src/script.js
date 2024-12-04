@@ -114,7 +114,7 @@ displacement.interactivePlane = new THREE.Mesh(
   new THREE.PlaneGeometry(10, 10),
   new THREE.MeshBasicMaterial({ color: "red" })
 );
-
+displacement.interactivePlane.visible = false;
 scene.add(displacement.interactivePlane);
 
 /**
@@ -130,6 +130,9 @@ window.addEventListener("pointermove", (e) => {
   displacement.cursorCoordinates.x = (e.clientX / sizes.width) * 2 - 1;
   displacement.cursorCoordinates.y = -(e.clientY / sizes.height) * 2 + 1;
 });
+
+// texture from canvas
+displacement.texture = new THREE.CanvasTexture(displacement.canvas);
 
 /**
  * Particles
@@ -147,6 +150,7 @@ const particlesMaterial = new THREE.ShaderMaterial({
       )
     ),
     uPictureTexture: new THREE.Uniform(textureLoader.load("./picture-1.png")),
+    uDisplacementTexture: displacement.texture,
   },
 });
 const particles = new THREE.Points(particlesGeometry, particlesMaterial);
@@ -174,7 +178,7 @@ const tick = () => {
 
   // fading all in the canvas
   displacement.context.globalCompositeOperation = "source-over";
-  displacement.context.globalAlpha = 0.1;
+  displacement.context.globalAlpha = 0.02;
   displacement.context.fillRect(
     0,
     0,
@@ -193,6 +197,9 @@ const tick = () => {
     glowSize,
     glowSize
   );
+
+  // update the buffer from the canvas
+  displacement.texture.needsUpdate = true;
 
   // Render
   renderer.render(scene, camera);
