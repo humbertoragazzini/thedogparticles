@@ -125,6 +125,7 @@ displacement.raycaster = new THREE.Raycaster();
 
 // Coordinates
 displacement.cursorCoordinates = new THREE.Vector2(999, 999);
+displacement.canvasCoordinates = new THREE.Vector2(999, 999);
 window.addEventListener("pointermove", (e) => {
   displacement.cursorCoordinates.x = (e.clientX / sizes.width) * 2 - 1;
   displacement.cursorCoordinates.y = -(e.clientY / sizes.height) * 2 + 1;
@@ -166,6 +167,8 @@ const tick = () => {
 
   if (intercections.length > 0) {
     const uv = intercections[0].uv;
+    displacement.canvasCoordinates.x = uv.x * displacement.canvas.width;
+    displacement.canvasCoordinates.y = uv.y * displacement.canvas.height;
     console.log(uv);
   }
 
