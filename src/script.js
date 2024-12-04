@@ -125,6 +125,7 @@ displacement.raycaster = new THREE.Raycaster();
 
 // Coordinates
 displacement.cursorCoordinates = new THREE.Vector2(999, 999);
+displacement.cursorCoordinatesPreview = new THREE.Vector2(999, 999);
 displacement.canvasCoordinates = new THREE.Vector2(999, 999);
 window.addEventListener("pointermove", (e) => {
   displacement.cursorCoordinates.x = (e.clientX / sizes.width) * 2 - 1;
@@ -202,7 +203,6 @@ const tick = () => {
     const uv = intercections[0].uv;
     displacement.canvasCoordinates.x = uv.x * displacement.canvas.width;
     displacement.canvasCoordinates.y = (1 - uv.y) * displacement.canvas.height;
-    console.log(uv);
   }
 
   // fading all in the canvas
@@ -215,10 +215,18 @@ const tick = () => {
     displacement.canvas.height
   );
 
+  // draw speed
+  const cursorDistance = displacement.cursorCoordinatesPreview.distanceTo(
+    displacement.cursorCoordinates
+  );
+  console.log(cursorDistance);
+  displacement.cursorCoordinatesPreview.copy(displacement.cursorCoordinates);
+  const alpha = Math.min(cursorDistance * 2, 1);
+
   //displacement draw image
   const glowSize = displacement.canvas.width * 0.25;
   displacement.context.globalCompositeOperation = "lighten";
-  displacement.context.globalAlpha = 1;
+  displacement.context.globalAlpha = alpha;
   displacement.context.drawImage(
     displacement.glowImage,
     displacement.canvasCoordinates.x - glowSize / 2,
