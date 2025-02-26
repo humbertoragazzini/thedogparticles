@@ -1,6 +1,6 @@
 # The dog particles - Humberto Ragazzini
 
-In this mini project we simulate a physic particles with the help of a 2d canvas drawing and custome shaders/vertex using THREEJS: [The dog particles](https://humbertoragazzini.github.io/thedogparticles/dist/)
+In this mini project we simulate a physic particles with the help of a 2d canvas drawing and custome shaders/vertex using THREEJS: [The dog particles](https://humbertoragazzini.github.io/thedogparticles/)
 
 # **Frameworks and Tecnologies**
 
@@ -24,7 +24,7 @@ In this mini project we simulate a physic particles with the help of a 2d canvas
 3. In this tab select settings.
 4. Click in pages in the option menu.
 5. Select in source branch master.
-6. Save, the project is deployed in github pages in the following link:[The dog particles](https://humbertoragazzini.github.io/thedogparticles/dist/)
+6. Save, the project is deployed in github pages in the following link:[The dog particles](https://humbertoragazzini.github.io/thedogparticles/)
 
 ## **To clone my repository in github**
 
